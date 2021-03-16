@@ -2,25 +2,27 @@
  * Author Wojciech Domski <Wojciech.Domski@gmail.com>
  * www: www.Domski.pl
  *
- * Hardware layer for SX1278 LoRa module
+ * Hardware layer for SX1276 LoRa module
  */
 
-#ifndef __SX1278_HW_HEADER
-#define __SX1278_HW_HEADER
+#ifndef __SX1276_HW_HEADER
+#define __SX1276_HW_HEADER
 
 #include <stdint.h>
+#include <stm32f1xx_hal.h>
+
 
 typedef struct {
 	int pin;
 	void *port;
-} SX1278_hw_dio_t;
+} SX1276_hw_dio_t;
 
 typedef struct {
-	SX1278_hw_dio_t reset;
-	SX1278_hw_dio_t dio0;
-	SX1278_hw_dio_t nss;
+	SX1276_hw_dio_t reset;
+	SX1276_hw_dio_t dio0;
+	SX1276_hw_dio_t nss;
 	void *spi;
-} SX1278_hw_t;
+} SX1276_hw_t;
 
 /**
  * \brief Initialize hardware layer
@@ -29,7 +31,7 @@ typedef struct {
  *
  * \param[in]   hw 		Pointer to hardware structure
  */
-void SX1278_hw_init(SX1278_hw_t *hw);
+void SX1276_hw_init(SX1276_hw_t *hw);
 
 /**
  * \brief Control NSS
@@ -39,7 +41,7 @@ void SX1278_hw_init(SX1278_hw_t *hw);
  * \param[in]   hw 		Pointer to hardware structure.
  * \param[in]   value   1 sets NSS high, other value sets NSS low.
  */
-void SX1278_hw_SetNSS(SX1278_hw_t *hw, int value);
+void SX1276_hw_SetNSS(SX1276_hw_t *hw, int value);
 
 /**
  * \brief Resets LoRa module
@@ -48,7 +50,7 @@ void SX1278_hw_SetNSS(SX1278_hw_t *hw, int value);
  *
  * \param[in]   hw 		Pointer to hardware structure
  */
-void SX1278_hw_Reset(SX1278_hw_t *hw);
+void SX1276_hw_Reset(SX1276_hw_t *hw);
 
 /**
  * \brief Send command via SPI.
@@ -58,7 +60,7 @@ void SX1278_hw_Reset(SX1278_hw_t *hw);
  * \param[in]   hw 		Pointer to hardware structure
  * \param[in]   cmd		Command
  */
-void SX1278_hw_SPICommand(SX1278_hw_t *hw, uint8_t cmd);
+void SX1276_hw_SPICommand(SX1276_hw_t *hw, uint8_t cmd);
 
 /**
  * \brief Reads data via SPI
@@ -69,7 +71,7 @@ void SX1278_hw_SPICommand(SX1278_hw_t *hw, uint8_t cmd);
  *
  * \return				Read value
  */
-uint8_t SX1278_hw_SPIReadByte(SX1278_hw_t *hw);
+uint8_t SX1276_hw_SPIReadByte(SX1276_hw_t *hw);
 
 /**
  * \brief ms delay
@@ -78,7 +80,7 @@ uint8_t SX1278_hw_SPIReadByte(SX1278_hw_t *hw);
  *
  * \param[in]   msec 		Number of milliseconds to wait
  */
-void SX1278_hw_DelayMs(uint32_t msec);
+void SX1276_hw_DelayMs(uint32_t msec);
 
 /**
  * \brief Reads DIO0 state
@@ -89,7 +91,7 @@ void SX1278_hw_DelayMs(uint32_t msec);
  *
  * \return				0 if DIO0 low, 1 if DIO high
  */
-int SX1278_hw_GetDIO0(SX1278_hw_t *hw);
+int SX1276_hw_GetDIO0(SX1276_hw_t *hw);
 
 #endif
 
