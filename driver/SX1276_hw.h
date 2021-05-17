@@ -9,7 +9,7 @@
 #define __SX1276_HW_HEADER
 
 #include <stdint.h>
-#include <stm32f1xx_hal.h>
+#include <stm32f4xx_hal.h>
 
 
 typedef struct {
